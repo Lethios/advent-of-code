@@ -1,3 +1,4 @@
+use core::cmp;
 use std::io;
 use std::io::BufRead;
 
@@ -12,10 +13,10 @@ fn part1() -> u32 {
             .split("x")
             .map(|dim| dim.parse().expect("Failed to parse number"))
             .collect();
-        
+
         let (l, w, h) = (dimensions[0], dimensions[1], dimensions[2]);
         let sur_area = (2 * l * w) + (2 * w * h) + (2 * h * l);
-        total_sum += sur_area;
+        total_sum += sur_area + cmp::min(l * w, cmp::min(w * h, h * l));
     }
 
     total_sum
@@ -24,3 +25,4 @@ fn part1() -> u32 {
 fn main() {
     println!("Part 1: {}", part1())
 }
+
