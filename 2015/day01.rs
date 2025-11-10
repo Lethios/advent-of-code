@@ -2,7 +2,7 @@
 
 use std::fs;
 
-fn part1(input: &String) -> i32 {
+fn part1(input: &str) -> i32 {
     let mut floor: i32 = 0;
 
     for chr in input.chars() {
@@ -16,7 +16,7 @@ fn part1(input: &String) -> i32 {
     floor
 }
 
-fn part2(input: &String) -> usize {
+fn part2(input: &str) -> usize {
     let mut floor: i32 = 0;
 
     for (index, chr) in input.chars().enumerate() {
