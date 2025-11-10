@@ -1,15 +1,12 @@
 use core::cmp;
-use std::io::{self, BufRead};
+use std::fs;
 
-fn part1() -> u32 {
-    let stdin = io::stdin();
+fn part1(input: &str) -> u32 {
     let mut total_sum: u32 = 0;
 
-    for line in stdin.lock().lines() {
-        let expr: String = line.expect("Failed to read line");
-
-        let dimensions: Vec<u32> = expr
-            .split("x")
+    for line in input.lines() {
+        let dimensions: Vec<u32> = line
+            .split('x')
             .map(|dim| dim.parse().expect("Failed to parse number"))
             .collect();
 
@@ -22,6 +19,8 @@ fn part1() -> u32 {
 }
 
 fn main() {
-    println!("Part 1: {}", part1())
+    let input = fs::read_to_string("input.txt").expect("Failed to read input file");
+
+    println!("Part 1: {}", part1(&input));
 }
 
