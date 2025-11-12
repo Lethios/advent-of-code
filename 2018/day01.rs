@@ -6,7 +6,7 @@ fn part1(input: &str) -> i32 {
     let mut frequency: i32 = 0;
 
     for line in input.lines() {
-        let number: i32 = line.parse().expect("Invalid integer");
+        let number: i32 = line.parse().expect("Invalid number");
         frequency += number;
     }
 
@@ -20,7 +20,7 @@ fn part2(input: &str) -> i32 {
 
     loop {
         for line in input.lines() {
-            let number: i32 = line.parse().expect("Invalid integer");
+            let number: i32 = line.parse().expect("Invalid number");
             frequency += number;
 
             if frequency_set.contains(&frequency) {
