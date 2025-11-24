@@ -18,7 +18,7 @@ jobs:
         with:
           userid: 5119609
           session: ${{ secrets.AOC_SESSION }}
-          year: 2025
+          year: 2015
 
           # --- CUSTOMIZATION SECTION ---
           # Only uncomment these if you change the badge colors in your README
