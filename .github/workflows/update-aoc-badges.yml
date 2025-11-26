@@ -1,6 +1,7 @@
 name: Update Advent of Code Badges
 
 on:
+  # Run manually when you want to update your stars
   workflow_dispatch:
     inputs:
       year:
@@ -34,10 +35,26 @@ jobs:
           cd ..
           rm -rf aocr
       
-      - name: Update badges
+      - name: Install expect
+        run: sudo apt-get update && sudo apt-get install -y expect
+      
+      - name: Update badges with expect
         run: |
-          # Use printf with newlines to properly format input for aocr
-          printf "%s\n%s\n\n" "${{ inputs.year }}" "${{ inputs.stars }}" | aocr
+          expect << 'EOF'
+          set timeout 10
+          spawn aocr
+          
+          # Wait for year prompt and send year
+          expect "Stars solved in" { send "${{ inputs.year }}\r" }
+          
+          # Wait for stars prompt and send stars count
+          expect "Stars solved in" { send "${{ inputs.stars }}\r" }
+          
+          # Send empty line to finish
+          expect "Stars solved in" { send "\r" }
+          
+          expect eof
+          EOF
       
       - name: Commit and push changes
         run: |
